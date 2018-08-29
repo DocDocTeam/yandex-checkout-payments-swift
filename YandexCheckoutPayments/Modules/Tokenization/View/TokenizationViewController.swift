@@ -215,19 +215,18 @@ class TokenizationViewController: UIViewController {
     // MARK: - Get presentation style
 
     func getStyle(_ vc: UIViewController) -> PresentationStyle {
-        let style: PresentationStyle
-        let vc = vc as? Presentable
-
+        guard let presentable = vc as? Presentable else {
+            return vc is PKPaymentAuthorizationViewController ? .applePay : .modal
+        }
+        
         switch traitCollection.horizontalSizeClass {
         case .regular:
-            style = vc?.iPadPresentationStyle ?? .pageSheet
+            return presentable.iPadPresentationStyle
         case .compact:
-            style = vc?.iPhonePresentationStyle ?? .modal
+            return presentable.iPhonePresentationStyle
         case .unspecified:
-            style = .modal
+            return .modal
         }
-
-        return style
     }
 
     // MARK: - Present as first screen in stack
