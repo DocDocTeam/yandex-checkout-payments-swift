@@ -12,6 +12,20 @@ public struct TokenizationModuleInputData {
         public let clickableRange: NSRange
         /// Link.
         public let url: URL?
+        
+        /// Creates instance of `Link`.
+        ///
+        /// - Parameters:
+        ///   - text: Formatted text.
+        ///   - clickableRange: Range of link in formatted text.
+        ///   - url: Link.
+        ///
+        /// - Returns: Instance of `Link`.
+        public init(text: NSAttributedString, clickableRange: NSRange, url: URL?) {
+            self.text = text
+            self.clickableRange = clickableRange
+            self.url = url
+        }
     }
     
     /// Client application key.
