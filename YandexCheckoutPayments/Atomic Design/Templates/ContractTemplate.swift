@@ -136,7 +136,16 @@ final class ContractTemplate: UIViewController {
         $0.addTarget(self, action: #selector(submitButtonDidPress), for: .touchUpInside)
         return $0
     }(UIButton(type: .custom))
-
+    
+    fileprivate lazy var offerLabel: UILabel = {
+        $0.font = .systemFont(ofSize: 11)
+        $0.numberOfLines = 0
+        $0.lineBreakMode = .byWordWrapping
+        $0.textAlignment = .center
+        $0.text = "Нажимая 'Продолжить' вы соглашаетесь с офертой"
+        return $0
+    }(UILabel())
+    
     fileprivate var descriptionLabelBottomConstraint: NSLayoutConstraint?
 
     fileprivate var priceViewTopConstraint: NSLayoutConstraint?
@@ -174,6 +183,7 @@ final class ContractTemplate: UIViewController {
             scrollView,
             headerView,
             submitButton,
+            offerLabel
         ]
 
         headerView.contentView.addSubview(titleLabel)
@@ -224,6 +234,8 @@ final class ContractTemplate: UIViewController {
             "[scrollView]",
             "-(double)-",
             "[submitButton]",
+            "-(double)-",
+            "[offerLabel]"
         ].joined()
 
         let bottomFormat = "V:[priceView]|"
@@ -239,6 +251,7 @@ final class ContractTemplate: UIViewController {
             "descriptionLabel": descriptionLabel,
             "priceView": priceView,
             "submitButton": submitButton,
+            "offerLabel": offerLabel,
             "headerView": headerView,
         ]
 
@@ -269,7 +282,11 @@ final class ContractTemplate: UIViewController {
             descriptionLabelSeparator.leading.constraint(equalTo: descriptionLabel.leading),
             descriptionLabelSeparator.trailing.constraint(equalTo: contentView.trailing),
 
-            view.bottomMargin.constraint(equalTo: submitButton.bottom, constant: Space.double),
+            offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
+            offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
+            offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
+            
+            view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
         ]
 
         constraints += makeConstraints -<< horizontalFormats
