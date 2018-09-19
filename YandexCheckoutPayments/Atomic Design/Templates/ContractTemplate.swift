@@ -7,7 +7,7 @@ protocol ContractTemplateViewOutput: class {
 }
 
 protocol ContractTemplateViewInput: class {
-    func setOfferText(_ offerText: NSAttributedString?)
+    func setOfferLink(_ offerLink: TokenizationModuleInputData.Link?)
     func setShopName(_ shopName: String)
     func setPurchaseDescription(_ purchaseDescription: String)
     func setPrice(_ price: PriceViewModel)
@@ -18,12 +18,22 @@ final class ContractTemplate: UIViewController {
 
     // MARK: - Data properties
     
-    var offerText: NSAttributedString? {
-        set {
-            offerLabel.attributedText = newValue
-        }
-        get {
-            return offerLabel.attributedText
+    var offerLink: TokenizationModuleInputData.Link? {
+        didSet {
+            offerLabel.attributedText = offerLink?.text
+            if let range = offerLink?.clickableRange, let url = offerLink?.url  {
+                offerLabel.onCharacterTapped = { label, characterIndex in
+                    if NSLocationInRange(characterIndex, range) {
+                        if #available(iOS 10, *) {
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        } else {
+                            UIApplication.shared.openURL(url)
+                        }
+                    }
+                }
+            } else {
+                offerLabel.onCharacterTapped = nil
+            }
         }
     }
     
@@ -147,13 +157,13 @@ final class ContractTemplate: UIViewController {
         return $0
     }(UIButton(type: .custom))
     
-    fileprivate lazy var offerLabel: UILabel = {
+    fileprivate lazy var offerLabel: LinkTappableLabel = {
         $0.font = .systemFont(ofSize: 11)
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
         $0.textAlignment = .center
         return $0
-    }(UILabel())
+    }(LinkTappableLabel())
     
     fileprivate var descriptionLabelBottomConstraint: NSLayoutConstraint?
 
@@ -290,23 +300,13 @@ final class ContractTemplate: UIViewController {
             descriptionLabelSeparator.top.constraint(equalTo: descriptionLabel.bottom, constant: Space.double),
             descriptionLabelSeparator.leading.constraint(equalTo: descriptionLabel.leading),
             descriptionLabelSeparator.trailing.constraint(equalTo: contentView.trailing),
+            
+            offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
+            offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
+            offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
+            
+            view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
         ]
-        
-        if let _ = offerText {
-            constraints += [
-                offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
-                offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
-                offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
-                
-                view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
-            ]
-            offerLabel.isHidden = false
-        } else {
-            constraints += [
-                view.bottomMargin.constraint(equalTo: submitButton.bottom, constant: Space.double)
-            ]
-            offerLabel.isHidden = true
-        }
         
         constraints += makeConstraints -<< horizontalFormats
         constraints.append(descriptionLabelBottomConstraint)
@@ -516,8 +516,8 @@ extension ContractTemplate: UIGestureRecognizerDelegate {
 
 extension ContractTemplate: ContractTemplateViewInput {
     
-    func setOfferText(_ offerText: NSAttributedString?) {
-        self.offerText = offerText
+    func setOfferLink(_ offerLink: TokenizationModuleInputData.Link?) {
+        self.offerLink = offerLink
     }
     
     func setShopName(_ shopName: String) {
@@ -543,4 +543,63 @@ private extension ContractTemplate {
         case `continue` = "Contract.next"
         case price = "Contract.price"
     }
+}
+
+// MARK: - LinkTappableLabel
+fileprivate class LinkTappableLabel: UILabel {
+    
+    var onCharacterTapped: ((_ label: UILabel, _ characterIndex: Int) -> Void)?
+    
+    private let tapGesture = UITapGestureRecognizer()
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
+    private func setUp() {
+        isUserInteractionEnabled = true
+        tapGesture.addTarget(self, action: #selector(LinkTappableLabel.labelTapped(_:)))
+        addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func labelTapped(_ gesture: UITapGestureRecognizer) {
+        guard gesture.state == .ended else {
+            return
+        }
+        
+        let locationOfTouch = gesture.location(in: gesture.view)
+        
+        let attributedText = NSMutableAttributedString(attributedString: self.attributedText!)
+        attributedText.addAttributes([NSAttributedStringKey.font: self.font], range: NSMakeRange(0, (self.attributedText?.string.count)!))
+        
+        // Create instances of NSLayoutManager, NSTextContainer and NSTextStorage
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: CGSize(width: self.frame.width, height: self.frame.height + 100))
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        
+        // Configure layoutManager and textStorage
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        // Configure textContainer
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = self.lineBreakMode
+        textContainer.maximumNumberOfLines = self.numberOfLines
+        let labelSize = self.bounds.size
+        textContainer.size = labelSize
+        
+        // get the index of character where user tapped
+        let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouch,
+                                                            in: textContainer,
+                                                            fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        onCharacterTapped?(self, indexOfCharacter)
+    }
+    
 }

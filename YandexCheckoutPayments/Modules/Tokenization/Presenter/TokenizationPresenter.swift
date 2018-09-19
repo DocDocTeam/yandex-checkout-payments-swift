@@ -134,7 +134,7 @@ extension TokenizationPresenter: TokenizationStrategyOutput {
                                                       shouldChangePaymentMethod: shouldChangePaymentOptions,
                                                       testModeSettings: inputData.testModeSettings,
                                                       tokenizeScheme: tokenizeScheme,
-                                                      offerText: inputData.offerText)
+                                                      offerLink: inputData.offerLink)
 
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
@@ -175,7 +175,7 @@ extension TokenizationPresenter: TokenizationStrategyOutput {
                                                       shouldChangePaymentMethod: shouldChangePaymentOptions,
                                                       testModeSettings: inputData.testModeSettings,
                                                       tokenizeScheme: tokenizeScheme,
-                                                      offerText: inputData.offerText)
+                                                      offerLink: inputData.offerLink)
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.router.presentSberbank(inputData: moduleInputData,

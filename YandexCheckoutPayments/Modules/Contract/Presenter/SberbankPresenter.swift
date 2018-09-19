@@ -30,7 +30,7 @@ extension SberbankPresenter: ContractViewOutput {
         guard let contractView = contractView,
               let paymentMethodView = paymentMethodView,
               let phoneInputView = phoneInputView else { return }
-        contractView.setOfferText(inputData.offerText)
+        contractView.setOfferLink(inputData.offerLink)
         contractView.setShopName(inputData.shopName)
         contractView.setPurchaseDescription(inputData.purchaseDescription)
         contractView.setPrice(inputData.price)

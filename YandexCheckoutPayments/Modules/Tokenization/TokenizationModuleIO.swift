@@ -3,7 +3,17 @@ import enum YandexCheckoutPaymentsApi.PaymentMethodType
 
 /// Input data for tokenization module.
 public struct TokenizationModuleInputData {
-
+    
+    /// Clickable Link.
+    public struct Link {
+        /// Formatted text.
+        public let text: NSAttributedString
+        /// Range of link in formatted text.
+        public let clickableRange: NSRange
+        /// Link.
+        public let url: URL?
+    }
+    
     /// Client application key.
     let clientApplicationKey: String
 
@@ -32,8 +42,8 @@ public struct TokenizationModuleInputData {
     /// Apple Pay merchant ID.
     let applePayMerchantIdentifier: String?
     
-    /// Offer text with link to official document.
-    let offerText: NSAttributedString?
+    /// Offer link to official document.
+    let offerLink: Link?
     
     /// Creates instance of `TokenizationModuleInputData`.
     ///
@@ -48,7 +58,7 @@ public struct TokenizationModuleInputData {
     ///   - testModeSettings: Test mode settings.
     ///   - cardScanning: Bank card scanning.
     ///   - applePayMerchantIdentifier: Apple Pay merchant ID.
-    ///   - offerText: Offer text with link to official document.
+    ///   - offerLink: Offer link to official document.
     ///
     /// - Returns: Instance of `TokenizationModuleInputData`.
     public init(clientApplicationKey: String,
@@ -60,7 +70,7 @@ public struct TokenizationModuleInputData {
                 testModeSettings: TestModeSettings? = nil,
                 cardScanning: CardScanning? = nil,
                 applePayMerchantIdentifier: String? = nil,
-                offerText: NSAttributedString? = nil) {
+                offerLink: Link? = nil) {
         self.clientApplicationKey = makeBase64Encoded(clientApplicationKey + ":")
         self.shopName = shopName
         self.purchaseDescription = purchaseDescription
@@ -70,7 +80,7 @@ public struct TokenizationModuleInputData {
         self.testModeSettings = testModeSettings
         self.cardScanning = cardScanning
         self.applePayMerchantIdentifier = applePayMerchantIdentifier
-        self.offerText = offerText
+        self.offerLink = offerLink
     }
 }
 
