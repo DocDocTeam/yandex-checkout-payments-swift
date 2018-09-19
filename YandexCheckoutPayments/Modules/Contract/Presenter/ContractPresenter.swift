@@ -26,6 +26,7 @@ extension ContractPresenter: ContractViewOutput {
     func setupView() {
         guard let contractView = contractView,
               let paymentMethodView = paymentMethodView else { return }
+        contractView.setOfferText(inputData.offerText)
         contractView.setShopName(inputData.shopName)
         contractView.setPurchaseDescription(inputData.purchaseDescription)
         contractView.setPrice(inputData.price)

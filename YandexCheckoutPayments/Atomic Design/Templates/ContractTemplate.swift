@@ -7,6 +7,7 @@ protocol ContractTemplateViewOutput: class {
 }
 
 protocol ContractTemplateViewInput: class {
+    func setOfferText(_ offerText: NSAttributedString?)
     func setShopName(_ shopName: String)
     func setPurchaseDescription(_ purchaseDescription: String)
     func setPrice(_ price: PriceViewModel)
@@ -16,7 +17,16 @@ protocol ContractTemplateViewInput: class {
 final class ContractTemplate: UIViewController {
 
     // MARK: - Data properties
-
+    
+    var offerText: NSAttributedString? {
+        set {
+            offerLabel.attributedText = newValue
+        }
+        get {
+            return offerLabel.attributedText
+        }
+    }
+    
     var shopName: String {
         set {
             titleLabel.styledText = newValue
@@ -142,7 +152,6 @@ final class ContractTemplate: UIViewController {
         $0.numberOfLines = 0
         $0.lineBreakMode = .byWordWrapping
         $0.textAlignment = .center
-        $0.text = "Нажимая 'Продолжить' вы соглашаетесь с офертой"
         return $0
     }(UILabel())
     
@@ -281,14 +290,24 @@ final class ContractTemplate: UIViewController {
             descriptionLabelSeparator.top.constraint(equalTo: descriptionLabel.bottom, constant: Space.double),
             descriptionLabelSeparator.leading.constraint(equalTo: descriptionLabel.leading),
             descriptionLabelSeparator.trailing.constraint(equalTo: contentView.trailing),
-
-            offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
-            offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
-            offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
-            
-            view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
         ]
-
+        
+        if let _ = offerText {
+            constraints += [
+                offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
+                offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
+                offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
+                
+                view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
+            ]
+            offerLabel.isHidden = false
+        } else {
+            constraints += [
+                view.bottomMargin.constraint(equalTo: submitButton.bottom, constant: Space.double)
+            ]
+            offerLabel.isHidden = true
+        }
+        
         constraints += makeConstraints -<< horizontalFormats
         constraints.append(descriptionLabelBottomConstraint)
 
@@ -496,6 +515,11 @@ extension ContractTemplate: UIGestureRecognizerDelegate {
 // MARK: - ContractTemplateViewInput
 
 extension ContractTemplate: ContractTemplateViewInput {
+    
+    func setOfferText(_ offerText: NSAttributedString?) {
+        self.offerText = offerText
+    }
+    
     func setShopName(_ shopName: String) {
         self.shopName = shopName
     }

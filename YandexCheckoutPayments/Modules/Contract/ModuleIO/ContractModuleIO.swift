@@ -6,6 +6,7 @@ struct ContractModuleInputData {
     let shouldChangePaymentMethod: Bool
     let testModeSettings: TestModeSettings?
     let tokenizeScheme: AnalyticsEvent.TokenizeScheme
+    let offerText: NSAttributedString?
 }
 
 protocol ContractModuleInput: ContractStateHandler {}

@@ -133,7 +133,8 @@ extension TokenizationPresenter: TokenizationStrategyOutput {
                                                       price: makePriceViewModel(paymentOption),
                                                       shouldChangePaymentMethod: shouldChangePaymentOptions,
                                                       testModeSettings: inputData.testModeSettings,
-                                                      tokenizeScheme: tokenizeScheme)
+                                                      tokenizeScheme: tokenizeScheme,
+                                                      offerText: inputData.offerText)
 
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
@@ -166,14 +167,15 @@ extension TokenizationPresenter: TokenizationStrategyOutput {
         let viewModel = makePaymentMethodViewModel(paymentOption: paymentOption)
         let priceViewModel = makePriceViewModel(paymentOption)
         let tokenizeScheme = TokenizeSchemeFactory.makeTokenizeScheme(paymentOption)
-
+        
         let moduleInputData = SberbankModuleInputData(shopName: inputData.shopName,
                                                       purchaseDescription: inputData.purchaseDescription,
                                                       paymentMethod: viewModel,
                                                       price: priceViewModel,
                                                       shouldChangePaymentMethod: shouldChangePaymentOptions,
                                                       testModeSettings: inputData.testModeSettings,
-                                                      tokenizeScheme: tokenizeScheme)
+                                                      tokenizeScheme: tokenizeScheme,
+                                                      offerText: inputData.offerText)
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else { return }
             strongSelf.router.presentSberbank(inputData: moduleInputData,
