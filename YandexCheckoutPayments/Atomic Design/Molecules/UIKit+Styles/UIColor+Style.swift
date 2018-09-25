@@ -61,6 +61,11 @@ extension UIColor {
     static let marineBlue = UIColor(red: 0, green: 143 / 255, blue: 174 / 255, alpha: 1)
     static let slateBlue = UIColor(red: 21 / 255, green: 42 / 255, blue: 96 / 255, alpha: 1)
     static let uglyBlue = UIColor(red: 43 / 255, green: 136 / 255, blue: 146 / 255, alpha: 1)
+    
+    // MARK: - DocDoc colors
+    static let turquoiseBlue = UIColor(red: 0, green: 0.68, blue: 0.79, alpha: 1)
+    static let turquoiseBlueDisabled = UIColor(red: 0.81, green: 0.82, blue: 0.86, alpha: 1)
+    static let turquoiseBlueHighlighted = UIColor(red: 1 / 255, green: 138 / 255, blue: 159 / 255, alpha: 1)
 
     // MARK: - Paired colors
     static let black5 = UIColor(white: 0, alpha: 0.05)

@@ -34,7 +34,7 @@ extension UIButton {
 
         /// Style for primary button.
         static let primary = Style(name: "primary") { (button: UIButton) in
-            let tintColor: UIColor = button.tintColor
+            let tintColor: UIColor = .turquoiseBlue
 
             button.setBackgroundImage(roundedBackground(color: tintColor), for: .normal)
             button.setBackgroundImage(roundedBackground(color: .highlighted(from: tintColor)), for: .highlighted)
@@ -208,24 +208,23 @@ extension UIButton {
             button.contentEdgeInsets.right = Space.double
 
             let font = UIFont.dynamicBodySemibold
-            let tintColor: UIColor = button.tintColor
             let cornerRadius = UIButton.Styles.cornerRadius
 
             let colors: [(UIControlState, foreground: UIColor, background: UIColor, backgroundImage: UIImage)] = [
                 (.normal,
                  .inverse,
-                 tintColor,
-                 UIButton.Styles.roundedBackground(color: tintColor,
+                 .clear,
+                 UIButton.Styles.roundedBackground(color: .turquoiseBlue,
                                                   cornerRadius: cornerRadius)),
                 (.highlighted,
                  .inverse,
                  .clear,
-                 UIButton.Styles.roundedBackground(color: .highlighted(from: tintColor),
+                 UIButton.Styles.roundedBackground(color: .turquoiseBlueHighlighted,
                                                    cornerRadius: cornerRadius)),
                 (.disabled,
                  .nobel,
-                 .mousegrey,
-                 UIButton.Styles.roundedBackground(color: .mousegrey,
+                 .clear,
+                 UIButton.Styles.roundedBackground(color: .turquoiseBlueDisabled,
                                                    cornerRadius: cornerRadius)),
             ]
             colors.forEach { (state, foreground, background, backgroundImage) in
