@@ -27,34 +27,35 @@ import UIKit
 
 extension UIBarButtonItem {
 
-    enum Styles {
+    enum Styles {}
 
-        // MARK: - Main styles
+}
 
-        /// Close bar button item.
-        ///
-        /// Image `barButtonItem.close`.
-        static let close = Style(name: "close") { (item: UIBarButtonItem) in
-            item.style = .plain
-            item.image = .templatedClose
-        }
-
-        /// Back bar button item.
-        ///
-        /// Image `barButtonItem.back`.
-        static let back = Style(name: "back") { (item: UIBarButtonItem) in
-            item.style = .plain
-            item.image = .back
-        }
-
-        /// Close bar button item with ability to set tint color.
-        ///
-        /// Image `button.templatedClose`.
-        static let templatedClose = Style(name: "templatedClose") { (item: UIBarButtonItem) in
-            item.tintColor = nil
-            item.style = .plain
-            item.image = .templatedClose
-        }
+extension UIBarButtonItem.Styles {
+    // MARK: - Main styles
+    
+    /// Close bar button item.
+    ///
+    /// Image `barButtonItem.close`.
+    static let close = Style(name: "close") { (item: UIBarButtonItem) in
+        item.style = .plain
+        item.image = .templatedClose
     }
-
+    
+    /// Back bar button item.
+    ///
+    /// Image `barButtonItem.back`.
+    static let back = Style(name: "back") { (item: UIBarButtonItem) in
+        item.style = .plain
+        item.image = .back
+    }
+    
+    /// Close bar button item with ability to set tint color.
+    ///
+    /// Image `button.templatedClose`.
+    static let templatedClose = Style(name: "templatedClose") { (item: UIBarButtonItem) in
+        item.tintColor = nil
+        item.style = .plain
+        item.image = .templatedClose
+    }
 }
