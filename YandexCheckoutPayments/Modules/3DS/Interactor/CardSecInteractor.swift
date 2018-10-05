@@ -56,17 +56,7 @@ extension CardSecInteractor: WebBrowserInteractorInput {
     }
 
     func processRequest(_ request: URLRequest) {
-        guard let destUrl = request.url,
-            let queryItems = URLComponents(url: destUrl, resolvingAgainstBaseURL: false)?.queryItems,
-            let status = queryItems.first(where: { $0.name == "status" })?.value else {
-            return
-        }
-        switch status {
-        case "success":
-            cardSecPresenter?.didSuccessfullyPassedCardSec()
-        default:
-            break
-        }
+        cardSecPresenter?.didSuccessfullyPassedCardSec()
     }
 }
 
