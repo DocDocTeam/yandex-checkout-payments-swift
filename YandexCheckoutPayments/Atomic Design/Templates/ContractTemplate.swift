@@ -301,11 +301,11 @@ final class ContractTemplate: UIViewController {
             descriptionLabelSeparator.leading.constraint(equalTo: descriptionLabel.leading),
             descriptionLabelSeparator.trailing.constraint(equalTo: contentView.trailing),
             
-            offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.double),
+            offerLabel.top.constraint(equalTo: submitButton.bottom, constant: Space.single),
             offerLabel.trailing.constraint(equalTo: headerView.trailing, constant: Space.quadruple),
             offerLabel.leading.constraint(equalTo: headerView.leading, constant: Space.quadruple),
             
-            view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.double)
+            view.bottomMargin.constraint(equalTo: offerLabel.bottom, constant: Space.triple)
         ]
         
         constraints += makeConstraints -<< horizontalFormats
