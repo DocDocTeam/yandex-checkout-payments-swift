@@ -24,6 +24,9 @@ class ModalTemplate: UIViewController {
     func setNavigationItems(_ items: [UINavigationItem]?, animated: Bool) {
         navigationBar.setItems(items, animated: animated)
         navigationBar.setNeedsLayout()
+        if let titleLabel = navigationBar.findSubview(ofType: UILabel.self) {
+            titleLabel.adjustsFontSizeToFitWidth = true
+        }
     }
 
     func pushNavigationItem(_ navigationItem: UINavigationItem, animated: Bool) {
