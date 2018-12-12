@@ -47,7 +47,6 @@ extension ContractPresenter: ContractViewOutput {
 
 extension ContractPresenter: ActionTextDialogDelegate {
     func didPressButton() {
-        nextButtonPressedNotification()
         moduleOutput?.didPressSubmitButton(on: self)
     }
 }
@@ -81,6 +80,7 @@ extension ContractPresenter: ContractInteractorOutput {}
 
 extension ContractPresenter: ContractTemplateViewOutput {
     func didPressSubmitButton(in contractTemplate: ContractTemplateViewInput) {
+        nextButtonPressedNotification()
         moduleOutput?.didPressSubmitButton(on: self)
     }
 
