@@ -9,11 +9,11 @@
 import Foundation
 
 extension Notification.Name {
-    static var nextButtonDidPressed: Notification.Name {
+    public static var nextButtonDidPressed: Notification.Name {
         return Notification.Name(rawValue: "Notifications.NextButtonDidPressed")
     }
     
-    static var payButtonFromCardDidPressed: Notification.Name {
+    public static var payButtonFromCardDidPressed: Notification.Name {
         return Notification.Name(rawValue: "Notifications.NextButtonFromCardDidPressed")
     }
 }
