@@ -133,7 +133,9 @@ private func makeMessage(_ error: Error) -> String {
 
 extension ContractPresenter {
     func nextButtonPressedNotification() {
-        NotificationCenter.default.post(name: Notification.Name.nextButtonDidPressed, object: nil)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name.nextButtonDidPressed, object: nil)
+        }
     }
 }
 
