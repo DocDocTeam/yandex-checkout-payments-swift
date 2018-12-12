@@ -453,6 +453,6 @@ private extension BankCardFocus {
 
 extension BankCardDataInputViewController {
     fileprivate func payButtonPressedNotification() {
-        NotificationCenter.default.post(name: Notification.Name.payButtonFromCardDidPressed, object: self)
+        NotificationCenter.default.post(name: Notification.Name.payButtonFromCardDidPressed, object: nil)
     }
 }
