@@ -286,6 +286,7 @@ extension BankCardDataInputViewController: BankCardDataInputViewInput {
 extension BankCardDataInputViewController {
     @objc
     func confirmButtonDidPress() {
+        payButtonPressedNotification()
         output.confirmButtonDidPress()
     }
 
@@ -445,5 +446,13 @@ private extension BankCardFocus {
         case .csc:
             return controller.additionalCardDataInputView.cvcControl
         }
+    }
+}
+
+// MARK: - NSNotification
+
+extension BankCardDataInputViewController {
+    fileprivate func payButtonPressedNotification() {
+        NotificationCenter.default.post(name: Notification.Name.payButtonFromCardDidPressed, object: self)
     }
 }

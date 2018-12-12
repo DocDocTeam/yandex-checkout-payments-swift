@@ -47,6 +47,7 @@ extension ContractPresenter: ContractViewOutput {
 
 extension ContractPresenter: ActionTextDialogDelegate {
     func didPressButton() {
+        nextButtonPressedNotification()
         moduleOutput?.didPressSubmitButton(on: self)
     }
 }
@@ -127,3 +128,12 @@ private func makeMessage(_ error: Error) -> String {
 
     return message
 }
+
+// MARK: - NSNotification
+
+extension ContractPresenter {
+    func nextButtonPressedNotification() {
+        NotificationCenter.default.post(name: Notification.Name.nextButtonDidPressed, object: self)
+    }
+}
+
