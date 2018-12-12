@@ -80,7 +80,6 @@ extension ContractPresenter: ContractInteractorOutput {}
 
 extension ContractPresenter: ContractTemplateViewOutput {
     func didPressSubmitButton(in contractTemplate: ContractTemplateViewInput) {
-        nextButtonPressedNotification()
         moduleOutput?.didPressSubmitButton(on: self)
     }
 
@@ -128,14 +127,3 @@ private func makeMessage(_ error: Error) -> String {
 
     return message
 }
-
-// MARK: - NSNotification
-
-extension ContractPresenter {
-    func nextButtonPressedNotification() {
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name.nextButtonDidPressed, object: nil)
-        }
-    }
-}
-
