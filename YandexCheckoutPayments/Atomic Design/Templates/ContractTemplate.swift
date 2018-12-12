@@ -386,7 +386,7 @@ final class ContractTemplate: UIViewController {
 
     @objc
     private func submitButtonDidPress() {
-        nextButtonPressedNotification
+        nextButtonPressedNotification()
         output?.didPressSubmitButton(in: self)
     }
 
