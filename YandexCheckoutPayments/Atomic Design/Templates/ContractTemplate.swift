@@ -386,6 +386,7 @@ final class ContractTemplate: UIViewController {
 
     @objc
     private func submitButtonDidPress() {
+        nextButtonPressedNotification
         output?.didPressSubmitButton(in: self)
     }
 
@@ -602,4 +603,12 @@ fileprivate class LinkTappableLabel: UILabel {
         onCharacterTapped?(self, indexOfCharacter)
     }
     
+}
+
+// MARK: - NSNotification
+
+extension ContractTemplate {
+    func nextButtonPressedNotification() {
+        NotificationCenter.default.post(name: Notification.Name.nextButtonDidPressed, object: nil)
+    }
 }
