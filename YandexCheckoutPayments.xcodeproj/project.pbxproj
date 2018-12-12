@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1179895A21C1114C00E140A4 /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179895921C1114C00E140A4 /* Notification.Name+Extension.swift */; };
 		244F7002D2E4B1277C9AF62F /* LargeIconItemView+PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F76F35EB6E319F4D88154 /* LargeIconItemView+PaymentMethodView.swift */; };
 		244F7007E807FF8F45A130AF /* UIView+SpecificLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F7527DA6DD45BB65278FD /* UIView+SpecificLayoutGuide.swift */; };
 		244F701E965233E81AF1AF8C /* TextControl+LeftIconMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F7D9FA14B108630127964 /* TextControl+LeftIconMode.swift */; };
@@ -620,6 +621,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1179895921C1114C00E140A4 /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
 		244F702ED6CBCEEAA24A9FD0 /* DeviceInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfoService.swift; sourceTree = "<group>"; };
 		244F7039AA39547B8112E4DD /* TextControl+TopHintMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TextControl+TopHintMode.swift"; sourceTree = "<group>"; };
 		244F706902364F69FAEF003B /* ActivityIndicatorFullViewPresenting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorFullViewPresenting.swift; sourceTree = "<group>"; };
@@ -2094,6 +2096,7 @@
 			isa = PBXGroup;
 			children = (
 				402EB07E4A3189AFC7FC1881 /* UIDevice+Hardware.swift */,
+				1179895921C1114C00E140A4 /* Notification.Name+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2976,6 +2979,7 @@
 				E06532901FED37DC00831588 /* PaymentMethodsAssembly.swift in Sources */,
 				7411A0F120651EC9003D4A35 /* NonEmptyValidator.swift in Sources */,
 				D98FEB12205ECB61002F8358 /* Formatter.swift in Sources */,
+				1179895A21C1114C00E140A4 /* Notification.Name+Extension.swift in Sources */,
 				D97D176D2041B343004AA14B /* SubmitDisplayItem.swift in Sources */,
 				30FCAAE01FF3F9BA002C69FF /* BankCardDataInputViewController.swift in Sources */,
 				30FCAAF01FF3F9E8002C69FF /* CardConfguration.swift in Sources */,
