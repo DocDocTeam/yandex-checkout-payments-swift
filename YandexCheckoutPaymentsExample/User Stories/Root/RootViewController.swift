@@ -335,7 +335,7 @@ final class RootViewController: UIViewController {
         }
 
         let amount = Amount(value: settings.price, currency: .rub)
-        let oauthToken = "live_MTkzODU2ScFXd5EXdUIP1HXmGSvpeLO3yMPnaPs2rs0"
+        let oauthToken = "live_MTkzODU2VY5GiyQq2GMPsCQ0PW7f_RSLtJYOT-mp_CA"
         let inputData = TokenizationModuleInputData(clientApplicationKey: oauthToken,
                                                     shopName: translate(Localized.name),
                                                     purchaseDescription: translate(Localized.description),
@@ -343,7 +343,7 @@ final class RootViewController: UIViewController {
                                                     tokenizationSettings: makeTokenizationSettings(),
                                                     testModeSettings: testSettings,
                                                     cardScanning: self,
-                                                    applePayMerchantIdentifier: "merchant.ru.yandex.mobile.money.debug")
+                                                    applePayMerchantIdentifier: "merchant.ru.yandex.mobile.msdk.debug")
         let viewController = TokenizationAssembly.makeModule(inputData: inputData,
                                                              moduleOutput: self)
         present(viewController, animated: true, completion: nil)

@@ -105,6 +105,7 @@ class ModalTemplate: UIViewController {
 
     func setContentView(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.frame = self.view.bounds
         self.view.insertSubview(view, at: 0)
 
         let constraints = [

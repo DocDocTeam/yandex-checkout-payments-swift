@@ -240,6 +240,18 @@ extension TokenizationPresenter: TokenizationStrategyOutput {
                                            moduleOutput: strongSelf)
         }
     }
+
+    func didFinish(on module: TokenizationStrategyInput) {
+        handleOnePaymentOptionMethodAtReturn()
+    }
+
+    func handleOnePaymentOptionMethodAtReturn() {
+        if paymentOptionsCount == 1 {
+            close()
+        } else {
+            presentPaymentMethodsModule()
+        }
+    }
 }
 
 // MARK: - TokenizationViewOutput
@@ -458,7 +470,7 @@ extension TokenizationPresenter: YandexAuthModuleOutput {
     func didFailFetchYamoneyPaymentMethods(on module: YandexAuthModuleInput) {}
 
     func didCancelAuthorizeInYandex(on module: YandexAuthModuleInput) {
-        presentPaymentMethodsModule()
+        handleOnePaymentOptionMethodAtReturn()
     }
 }
 
