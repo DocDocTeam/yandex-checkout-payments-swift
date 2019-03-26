@@ -41,8 +41,8 @@ Pod::Spec.new do |s|
 
   s.ios.dependency 'YandexLoginSDK'
   s.ios.dependency 'YandexMoneyCoreApi'
-  s.ios.dependency 'YandexCheckoutPaymentsApi'
-  s.ios.dependency 'YandexCheckoutShowcaseApi'
-  s.ios.dependency 'YandexCheckoutWalletApi'
+  s.ios.dependency 'YandexCheckoutPaymentsApi', '1.0.1'
+  s.ios.dependency 'YandexCheckoutShowcaseApi', '1.0.0'
+  s.ios.dependency 'YandexCheckoutWalletApi', '1.0.2'
   s.ios.dependency 'YandexMobileMetrica/Dynamic', '~> 3.1.2'
 end
