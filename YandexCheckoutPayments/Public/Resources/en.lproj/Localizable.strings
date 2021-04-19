@@ -93,9 +93,9 @@
 /*Что то пошло не так, неизвестная ошибка*/
 "Common.Error.unknown" = "Something went wrong";
 
-"TermsOfService.Text" = "By clicking this button, you accept";
+"TermsOfService.Text" = "By clicking \"Continue\" button, you accept";
 
-"TermsOfService.Hyperlink" = "the terms and conditions of the service";
+"TermsOfService.Hyperlink" = "terms of the offer";
 
 "SavePaymentMethod.Wallet.UserPriority.Text" = "Allow the store";
 

@@ -26,5 +26,5 @@ private enum Localized {
 // MARK: - Constants
 
 private enum Constants {
-    static let termsOfServiceUrl = URL(string: "https://tm.sberhealth.ru/mmbofferta")!
+    static let termsOfServiceUrl = URL(string: "https://sberhealth.ru/documents/contract.html")!
 }
